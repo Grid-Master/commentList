@@ -1,0 +1,75 @@
+let nameReq = document.getElementById('nameReq');
+let commentReq = document.getElementById('commentReq');
+let nameInput = document.getElementById('name');
+let commentInput = document.getElementById('comment');
+let dateInput = document.getElementById('date');
+document.getElementById('date').valueAsDate = new Date();
+
+function clearDate() {
+  document.getElementById('date').valueAsDate = null;
+}
+
+nameInput.onblur = () => {
+  if (nameInput.value == '') {
+    nameReq.innerText = 'Введите имя!';
+  } else {
+    nameReq.innerText = '';
+  }
+};
+
+commentInput.onblur = () => {
+  if (commentInput.value == '') {
+    commentReq.innerText = 'Введите комментарий!';
+  } else {
+    commentReq.innerText = '';
+  }
+};
+
+function addComment() {
+  let name = nameInput.value;
+  let comment = commentInput.value;
+  let date = dateInput.valueAsDate;
+  let list = document.getElementById('commentList');
+
+  let nameEl = document.createElement('h3');
+  let commentEl = document.createElement('p');
+  let dateEl = document.createElement('h4');
+  let deleteEl = document.createElement('button');
+  let likeEl = document.createElement('div');
+  let container = document.createElement('div');
+
+  nameEl.innerHTML = name;
+  commentEl.innerHTML = comment;
+  deleteEl.style.width = '50px';
+  deleteEl.style.height = '50px';
+  deleteEl.className = 'delete';
+  likeEl.style.width = '50px';
+  likeEl.style.height = '50px';
+  likeEl.className = 'unliked';
+
+  deleteEl.addEventListener('click', () => {
+    deleteEl.parentElement.remove();
+  });
+
+  likeEl.addEventListener('click', () => {
+    likeEl.classList.toggle('liked');
+  });
+  if (date != null) {
+    if (date.toLocaleDateString() == new Date().toLocaleDateString()) {
+      dateEl.innerHTML = `Сегодня в ${new Date().toLocaleTimeString()}`;
+      container.append(nameEl, commentEl, dateEl, deleteEl, likeEl);
+    } else if (date.toLocaleDateString() == new Date(Date.now() - 86400000).toLocaleDateString()) {
+      dateEl.innerHTML = `Вчера в ${new Date().toLocaleTimeString()}`;
+      container.append(nameEl, commentEl, dateEl, deleteEl, likeEl);
+    } else {
+      dateEl.innerHTML = `${date.toLocaleDateString()} в ${new Date().toLocaleTimeString()}`;
+      container.append(nameEl, commentEl, dateEl, deleteEl, likeEl);
+    }
+  } else {
+    container.append(nameEl, commentEl, deleteEl, likeEl);
+  }
+  list.append(container);
+  nameInput.value = '';
+  commentInput.value = '';
+  dateInput.value = null;
+}

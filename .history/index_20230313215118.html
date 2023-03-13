@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Comments</title>
+    <style>
+      form {
+        width: 50vw;
+        margin-left: 25vw;
+        background-color: bisque;
+        display: flex;
+        flex-direction: column;
+        padding: 50px;
+      }
+
+      input[type='text'] {
+        width: 300px;
+        padding: 10px;
+        margin-bottom: 20px;
+      }
+      textarea {
+        width: 400px;
+        height: 50px;
+        resize: none;
+        margin-bottom: 20px;
+      }
+
+      input[type='date'] {
+        width: 200px;
+        padding: 9px;
+        margin-bottom: 20px;
+      }
+
+      button {
+        width: 100px;
+        padding: 10px;
+      }
+
+      #commentList {
+        width: 50vw;
+        height: 500px;
+        margin-left: 25vw;
+        overflow-y: scroll;
+      }
+
+      #commentList > div {
+        border: 1px solid black;
+        padding: 5px;
+        padding-left: 20px;
+        margin-bottom: 5px;
+      }
+
+      #nameReq,
+      #commentReq {
+        color: red;
+      }
+
+      .delete {
+        background-image: url('./images/1483063.png');
+        background-size: cover;
+        cursor: pointer;
+      }
+
+      .unliked {
+        background-image: url('./images/istockphoto-1136351242-612x612.jpg');
+        background-size: cover;
+        cursor: pointer;
+      }
+      .liked {
+        background-image: url('./images/Multimedia__28107_29.jpg');
+      }
+
+      .input-container {
+        display: flex;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <form id="form" onsubmit="addComment(); return false">
+      <div class="input-container">
+        <input id="name" type="text" placeholder="Введите имя" />
+        <h3 id="nameReq"></h3>
+      </div>
+      <div class="input-container">
+        <textarea id="comment" placeholder="Ваш комментарий..."></textarea>
+        <h3 id="commentReq"></h3>
+      </div>
+      <div>
+        <input type="date" id="date" />
+        <button type="button" onclick="clearDate()">Очистить</button>
+      </div>
+      <button type="submit">Добавить</button>
+    </form>
+    <ul id="commentList"></ul>
+    <script src="./script.js"></script>
+  </body>
+</html>
